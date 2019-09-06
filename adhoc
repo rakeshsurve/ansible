@@ -1,0 +1,10 @@
+ansible --version
+ansible --version
+ansible localhost -m ping
+ansible localhost -m copy -a "content='Ansible is Awesome' dest=./motd"
+ansible localhost -m lineinfile -a "line='Ansible is superAwesome' path=./motd"
+ansible localhost -m lineinfile -a "regexp='^Ansible is wow' line='Ansible is redhat' path=./motd"
+
+
+
+
