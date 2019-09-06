@@ -1,0 +1,13 @@
+---
+- name: httpd
+  hosts: localhost
+  tasks:
+  - name: httpd
+    yum:
+      name: httpd
+      state: present
+
+  - name: http start
+    service:
+      name: httpd 
+      state: started 
