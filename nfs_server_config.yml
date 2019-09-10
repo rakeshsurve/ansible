@@ -1,0 +1,34 @@
+---
+- name: Configure nfs server
+  hosts: localhost
+  tasks:
+   - name: Install nfs
+     yum:
+      name: nfs-utils
+      state: present
+
+   - name: Create a directory to share on server
+     file:
+       path: /root/nfs_server
+       state: directory
+       mode: '0755'
+     
+
+   - name: make entry in /etc/exports
+     copy:
+       content: '/root/nfs_server      *.example.com(rw,sync)'
+       dest: /etc/exports
+
+   - name: Restart nfs service on server
+     service:
+       name: nfs
+       state: restarted
+
+
+   - name: Add entry in firewall on server
+     firewalld:
+        service: nfs
+        permanent: yes
+        state: enabled
+
+
